@@ -1,8 +1,9 @@
 <template>
-  <button class="me-button" :class="{[`me-icon-${iconPosition}`]:true}">
-    <me-icon v-if="icon" :icon="icon"></me-icon>
+  <button class="me-button" :class="{[`me-icon-${iconPosition}`]:true}" @click="$emit('click')">
+    <me-icon v-if="icon && !loading" :name="icon" />
+    <me-icon v-if="loading" class="me-loading" :name="loadingIcon"></me-icon>
     <div class="me-content">
-      <slot></slot>
+      <slot />
     </div>
   </button>
 </template>
@@ -12,6 +13,13 @@ export default {
   name: "MeButton",
   props: {
     icon: {},
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    loadingIcon: {
+      default: "i-loading"
+    },
     iconPosition: {
       type: String,
       default: "left",
@@ -24,6 +32,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .me-button {
   font-size: var(--font-size);
   height: var(--button-height);
@@ -62,6 +78,9 @@ export default {
     > .me-content {
       order: 1;
     }
+  }
+  .me-loading {
+    animation: rotate 1s infinite linear;
   }
 }
 </style>

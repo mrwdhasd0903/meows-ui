@@ -1,13 +1,13 @@
 <template>
-  <svg v-if="icon" class="me-icon">
-    <use :xlink:href="'#'+icon" />
+  <svg v-if="name" class="me-icon">
+    <use :xlink:href="'#'+name" />
   </svg>
 </template>
 
 <script>
 export default {
   name: "MeIcon",
-  props: ["icon"]
+  props: ["name"]
 };
 </script>
 
