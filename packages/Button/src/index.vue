@@ -1,8 +1,6 @@
 <template>
   <button class="me-button" :class="{[`me-icon-${iconPosition}`]:true}">
-    <svg v-if="icon" class="me-icon">
-      <use :xlink:href="'#'+icon" />
-    </svg>
+    <me-icon v-if="icon" :icon="icon"></me-icon>
     <div class="me-content">
       <slot></slot>
     </div>
@@ -26,10 +24,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.me-icon {
-  height: 1em;
-  width: 1em;
-}
 .me-button {
   font-size: var(--font-size);
   height: var(--button-height);
