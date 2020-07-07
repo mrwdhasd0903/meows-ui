@@ -1,8 +1,9 @@
 {
-  "name": "meow-ui",
+  "name": "meows-ui",
   "version": "0.0.1",
-  "description": "这是一个UI框架",
-  "private": true,
+  "description": "基于VUE的UI组件库",
+  "main": "src/index.js",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
