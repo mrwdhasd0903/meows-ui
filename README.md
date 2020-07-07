@@ -1,4 +1,4 @@
-# meow-ui
+# meow-ui 一个vue的ui组件,目前处于开发阶段
 
 ## Project setup
 ```
