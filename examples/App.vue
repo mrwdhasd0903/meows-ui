@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <me-button></me-button>
+    <me-button icon="i-shezhi">设置</me-button>
+    <me-button>设置</me-button>
+    <me-button icon="i-shezhi" icon-position="right">设置</me-button>
   </div>
 </template>
 

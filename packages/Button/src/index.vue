@@ -1,14 +1,35 @@
 <template>
-  <button class="me-button">按钮</button>
+  <button class="me-button" :class="{[`me-icon-${iconPosition}`]:true}">
+    <svg v-if="icon" class="me-icon">
+      <use :xlink:href="'#'+icon" />
+    </svg>
+    <div class="me-content">
+      <slot></slot>
+    </div>
+  </button>
 </template>
 
 <script>
 export default {
-  name: "MeButton"
+  name: "MeButton",
+  props: {
+    icon: {},
+    iconPosition: {
+      type: String,
+      default: "left",
+      validator(val) {
+        return val == "left" || val == "right";
+      }
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
+.me-icon {
+  height: 1em;
+  width: 1em;
+}
 .me-button {
   font-size: var(--font-size);
   height: var(--button-height);
@@ -16,6 +37,10 @@ export default {
   border-radius: 4px;
   border: 1px solid var(--border-color);
   background: var(--button-bg);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
   cursor: pointer;
   &:hover {
     border-color: var(--boder-color-hover);
@@ -25,6 +50,24 @@ export default {
   }
   &:focus {
     outline: none;
+  }
+  &.me-icon-left {
+    > .me-icon {
+      order: 1;
+      margin-right: 0.1em;
+    }
+    > .me-content {
+      order: 2;
+    }
+  }
+  &.me-icon-right {
+    > .me-icon {
+      order: 2;
+      margin-left: 0.1em;
+    }
+    > .me-content {
+      order: 1;
+    }
   }
 }
 </style>
