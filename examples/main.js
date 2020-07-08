@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import Button from '../packages/Button'
-import Icon from '../packages/Icon'
+import meows from '../src/index.js'
+
 Vue.config.productionTip = false
 
-Vue.use(Button)
-Vue.use(Icon)
+Vue.use(meows)
 
 new Vue({
   render: h => h(App),

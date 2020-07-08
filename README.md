@@ -1,24 +1,18 @@
 # meow-ui 一个vue的ui组件,目前处于开发阶段
 
-## Project setup
+## npm安装
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+npm install meows-ui
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 使用
+1、使用Vue CLI创建项目
+2、在main.js中
+> import MeowsUI from 'meows-ui'
+> import 'meows-ui/dist/meows-ui.css'
+> Vue.use(MeowsUI)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 已有组件
+Button
+ButtonGroup
+Icon

@@ -1,0 +1,9 @@
+# 忽略发布
+examples/
+packages/
+public/
+
+#指定文件
+vue.config.js
+babel.config.js
+*.map

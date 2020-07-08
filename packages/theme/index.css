@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+:root {
+  --me-button-height: 32px;
+  --me-font-size: 14px;
+  --me-button-bg: white;
+  --me-button-active-bg: #eee;
+  --me-color: #333;
+  --me-border-color: #999;
+  --me-border-radius: 4px;
+  --me-boder-color-hover: #666;
+}

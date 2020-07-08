@@ -41,22 +41,22 @@ export default {
   }
 }
 .me-button {
-  font-size: var(--font-size);
-  height: var(--button-height);
+  font-size: var(--me-font-size);
+  height: var(--me-button-height);
   padding: 0 1em;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  background: var(--button-bg);
+  border-radius: var(--me-border-radius);
+  border: 1px solid var(--me-border-color);
+  background: var(--me-button-bg);
   display: inline-flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
   cursor: pointer;
   &:hover {
-    border-color: var(--boder-color-hover);
+    border-color: var(--me-boder-color-hover);
   }
   &:active {
-    background-color: var(--button-active-bg);
+    background-color: var(--me-button-active-bg);
   }
   &:focus {
     outline: none;
