@@ -1,4 +1,5 @@
 module.exports = {
+  outputDir: 'lib',
   pages: {
     index: {
       //修改项目的入口文件
