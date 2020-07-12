@@ -12,18 +12,19 @@ export default {
 
 <style scoped lang="scss">
 .me-button-group {
+  $radius: 4px;
   > .me-button {
     border-radius: 0;
     &:not(:first-child) {
       margin-left: -1px;
     }
     &:first-child {
-      border-top-left-radius: var(--me-border-radius);
-      border-bottom-left-radius: var(--me-border-radius);
+      border-top-left-radius: $radius;
+      border-bottom-left-radius: $radius;
     }
     &:last-child {
-      border-top-right-radius: var(--me-border-radius);
-      border-bottom-right-radius: var(--me-border-radius);
+      border-top-right-radius: $radius;
+      border-bottom-right-radius: $radius;
     }
     &:hover {
       position: relative;
