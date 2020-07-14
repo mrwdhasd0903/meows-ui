@@ -166,7 +166,7 @@ export default {
     cursor: not-allowed;
     &:focus,
     &:hover {
-      @include colorAndfill($default);
+      @include colorAndfill(#fff);
     }
     &.me-border-outer-to-in,
     &.me-border-outer {

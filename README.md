@@ -12,7 +12,7 @@ npm install meows-ui
 
 > import MeowsUI from 'meows-ui'
 > 
-> import 'meows-ui/dist/meows-ui.css'
+> import 'meows-ui/lib/meows-ui.css'
 > 
 > Vue.use(MeowsUI)
 
