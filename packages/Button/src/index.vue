@@ -167,6 +167,7 @@ export default {
     &:focus,
     &:hover {
       @include colorAndfill(#fff);
+      background-color: $default;
     }
     &.me-border-outer-to-in,
     &.me-border-outer {

@@ -19,6 +19,7 @@ export default {
 
 <style scoped lang="scss">
 .me-button-group {
+  display: inline-block;
   $radius: 4px;
   $roundRadius: 16px;
   > .me-button {
