@@ -249,7 +249,7 @@ export default {
   &.me-icon--left {
     > .me-icon {
       order: 1;
-      margin-right: 0.1em;
+      margin-right: 0.3em;
     }
     > .me-content {
       order: 2;
@@ -258,7 +258,7 @@ export default {
   &.me-icon--right {
     > .me-icon {
       order: 2;
-      margin-left: 0.1em;
+      margin-left: 0.3em;
     }
     > .me-content {
       order: 1;
