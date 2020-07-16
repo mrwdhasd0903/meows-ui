@@ -1,5 +1,5 @@
 <template>
-  <svg v-if="name" class="me-icon">
+  <svg v-if="name" :style="{fill:fill}" class="me-icon">
     <use :xlink:href="'#'+name" />
   </svg>
 </template>
@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "MeIcon",
-  props: ["name"]
+  props: ["name", "fill"]
 };
 </script>
 
