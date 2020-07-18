@@ -14,7 +14,7 @@ const router = new VueRouter({
   routes: [{
     path: '/',
     // 重定向
-    redirect: '/button'
+    redirect: '/layout'
   },{
     path:'/button',
     component:()=>import("./components/button")

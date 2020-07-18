@@ -1,7 +1,14 @@
 <template>
-  <div class="me-col" :class="[
-    'me-span--'+span
-  ]">
+  <div
+    class="me-col"
+    :class="[
+    'me-span--'+span,
+    offset?'me-offset--'+offset:''
+  ]"
+    :style="{
+  ...space
+  }"
+  >
     <slot />
   </div>
 </template>
@@ -12,15 +19,25 @@ export default {
   props: {
     span: {
       default: 24
+    },
+    offset: {
+      default: 0
     }
   },
-  components: {},
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {},
-  mounted() {}
+  computed: {
+    //计算padding
+    space() {
+      let _space = this.$parent.space;
+      if (!_space) {
+        return null;
+      }
+      let padding = _space / 2;
+      return {
+        paddingLeft: padding + "px",
+        paddingRight: padding + "px"
+      };
+    }
+  }
 };
 </script>
 
@@ -28,7 +45,9 @@ export default {
 .me-col {
   @import "./colspan.scss";
   display: inline-block;
-  border: 1px solid #eee;
-  min-height: 10px;
 }
+@import "./colspan-xs.scss";
+@import "./colspan-sm.scss";
+@import "./colspan-md.scss";
+@import "./colspan-lg.scss";
 </style>
