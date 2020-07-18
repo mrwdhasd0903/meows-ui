@@ -1,5 +1,8 @@
 @media (min-width: 768px) and (max-width: 991px) {
   .me-col {
+    &.me-span-sm--0 {
+      display: none;
+    }
     &.me-span-sm--1 {
       width: 4.166666666666667%;
     }
