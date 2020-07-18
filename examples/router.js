@@ -21,6 +21,9 @@ const router = new VueRouter({
   },{
     path:'/icon',
     component:()=>import("./components/icon")
+  },{
+    path:'/layout',
+    component:()=>import("./components/layout")
   }],
   mode: 'history'
 })
