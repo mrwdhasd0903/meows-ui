@@ -12,10 +12,12 @@
       'me-border-outer-in':outerin,
       'me-border-outer-to-in':outertoin,
       'me-border-round':round,
-      'me-border-circle':circle
+      'me-border-circle':circle,
+      'me-full':full
     }
     ]"
     @click="disabled?'':$emit('click')"
+
   >
     <me-icon v-if="icon && !loading" :name="icon" />
     <me-icon v-if="loading" class="me-loading" :name="loadingIcon"></me-icon>
@@ -30,6 +32,7 @@ export default {
   name: "MeButton",
   props: {
     icon: {},
+    full: Boolean,
     round: Boolean,
     circle: Boolean,
     nofocus: Boolean,
@@ -294,8 +297,11 @@ export default {
       border-radius: 20px;
     }
   }
-  .me-loading {
+  &.me-loading {
     animation: rotate 1s infinite linear;
+  }
+  &.me-full{
+    width: 100%;
   }
 }
 </style>

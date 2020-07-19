@@ -1,5 +1,8 @@
 <template>
   <div class>
+    <p>
+      <me-button full>设置</me-button>
+    </p>
     <span>
       <me-button>设置</me-button>
     </span>

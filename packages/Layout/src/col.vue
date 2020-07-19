@@ -69,6 +69,7 @@ export default {
 .me-col {
   @import "./colspan.scss";
   display: inline-block;
+  font-size: 16px;
   transition: width 0.2s ease, margin-left 0.2s ease;
 }
 @import "./colspan-xs.scss";

@@ -1,5 +1,13 @@
 <template>
   <div class>
+     <me-row>
+      <me-col span="12">
+        <div class="a1">12</div>
+      </me-col>
+      <me-col span="12">
+        <div class="a1">12</div>
+      </me-col>
+    </me-row>
     <me-row>
       <me-col span="1" v-for="(item, index) in arr" :key="index">{{index}}</me-col>
     </me-row>
@@ -93,5 +101,11 @@ export default {
 <style scoped>
 .tt {
   background: rgb(238, 173, 173);
+}
+.a1 {
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #41b17e;
+  color: #41b17e;
 }
 </style>

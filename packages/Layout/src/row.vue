@@ -3,8 +3,8 @@
     class="me-row"
     :style="{
     ...spaceStyle,
-    justifyContent:justifyContent,
-    alignItems:alignItems,
+    justifyContent:flex?justifyContent:'',
+    alignItems:flex?alignItems:'',
     display:flex?'flex':''
   }"
   >
@@ -63,15 +63,15 @@ export default {
     },
     //alignItems计算
     alignItems() {
-      let value = "flex-start";
+      let value = "stretch";
       if (this.align.indexOf("end") != -1) {
         value = "flex-end";
       } else if (this.align.indexOf("center") != -1) {
         value = "center";
+      } else if (this.align.indexOf("start") != -1) {
+        value = "flex-start";
       } else if (this.align.indexOf("baseline") != -1) {
         value = "baseline ";
-      } else if (this.align.indexOf("stretch") != -1) {
-        value = "stretch ";
       }
       return value;
     }
@@ -80,4 +80,7 @@ export default {
 </script>
 
 <style scoped>
+.me-row {
+  font-size: 0;
+}
 </style>
