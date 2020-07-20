@@ -14,7 +14,7 @@ const router = new VueRouter({
   routes: [{
     path: '/',
     // 重定向
-    redirect: '/layout'
+    redirect: '/three'
   },{
     path:'/button',
     component:()=>import("./components/button")
@@ -24,6 +24,9 @@ const router = new VueRouter({
   },{
     path:'/layout',
     component:()=>import("./components/layout")
+  },{
+    path:'/three',
+    component:()=>import("./components/three")
   }],
   mode: 'history'
 })

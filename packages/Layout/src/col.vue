@@ -65,7 +65,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .me-col {
   @import "./colspan.scss";
   display: inline-block;

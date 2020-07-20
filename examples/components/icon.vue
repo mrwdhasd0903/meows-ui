@@ -1,5 +1,5 @@
 <template>
-  <div class="me-icon">
+  <div class="meexample-icon">
     <me-icon v-for="(item, index) in iconArr" :key="index" :name="item"></me-icon>
   </div>
 </template>
@@ -215,7 +215,7 @@ export default {
 </script>
 
 <style scoped>
-.me-icon {
+.meexample-icon {
   font-size: 50px;
 }
 </style>

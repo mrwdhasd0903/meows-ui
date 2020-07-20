@@ -17,7 +17,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .me-button-group {
   display: inline-block;
   $radius: 4px;

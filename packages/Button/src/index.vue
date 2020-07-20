@@ -70,7 +70,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "../../theme/color.scss";
 @mixin colorAndfill($color) {
   color: $color;
@@ -297,7 +297,7 @@ export default {
       border-radius: 20px;
     }
   }
-  &.me-loading {
+  .me-loading {
     animation: rotate 1s infinite linear;
   }
   &.me-full{

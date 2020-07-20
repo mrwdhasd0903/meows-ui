@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .me-row {
   font-size: 0;
 }

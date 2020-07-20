@@ -22,7 +22,8 @@ export default {
       plateMenu: [
         { link: "/button", text: "按钮" },
         { link: "/icon", text: "图标" },
-        { link: "/layout", text: "布局" }
+        { link: "/layout", text: "布局" },
+        { link: "/three", text: "魔方" }
       ]
     };
   }
