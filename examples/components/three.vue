@@ -1,19 +1,33 @@
 <template>
   <div class="dddiv">
-    <me-three ref="three" width="120" height="160" deep="200">
-      <me-surface slot="front">前</me-surface>
-      <me-surface slot="back">后</me-surface>
-      <me-surface slot="top">上</me-surface>
-      <me-surface slot="bottom">下</me-surface>
-      <me-surface slot="left">左</me-surface>
-      <me-surface slot="right">右</me-surface>
+    <me-three ref="three2" delay="1000" :actions="['top']" width="230" height="62">
+      <me-side active>
+        <span class="span">唯有时间</span>
+      </me-side>
+      <me-side>
+        <span class="span">对我们一视同仁</span>
+      </me-side>
     </me-three>
-    <me-button style="marginLeft:300px" @click="rollBack('top')">↑</me-button>
-    <me-button style="marginLeft:300px;marginTop:40px" @click="rollBack('bottom')">↓</me-button>
-    <me-button style="marginLeft:240px;marginTop:-130px" @click="rollBack('left')">←</me-button>
-    <me-button style="marginLeft:350px;marginTop:-160px" @click="rollBack('right')">→</me-button>
-    <input style="marginLeft:350px;marginTop:-160px" type="text" v-model="code" />
-    <me-button style="marginLeft:350px;marginTop:-160px" @click="evalString">执行</me-button>
+    <me-three ref="three1" width="230" height="62">
+      <me-side active>
+        <span class="span">唯有时间</span>
+      </me-side>
+      <me-side>
+        <span class="span">对我们一视同仁</span>
+      </me-side>
+    </me-three>
+    <span>
+      <me-button @click="rollBack2('top')">上</me-button>
+      <me-button @click="rollBack2('bottom')">下</me-button>
+      <me-button @click="rollBack2('left')">左</me-button>
+      <me-button @click="rollBack2('right')">右</me-button>
+    </span>
+    <span>
+      <me-button @click="rollBack1('top')">上</me-button>
+      <me-button @click="rollBack1('bottom')">下</me-button>
+      <me-button @click="rollBack1('left')">左</me-button>
+      <me-button @click="rollBack1('right')">右</me-button>
+    </span>
   </div>
 </template>
 
@@ -28,19 +42,11 @@ export default {
   },
   computed: {},
   methods: {
-    evalString() {
-      var arr = this.code.split(" ");
-      this.$refs.three.evalString(
-        "this.rotateX=" +
-          arr[0] +
-          ";this.rotateY=" +
-          arr[1] +
-          ";this.rotateZ=" +
-          arr[2]
-      );
+    rollBack1(flag) {
+      this.$refs.three1.rollBack(flag);
     },
-    rollBack(flag) {
-      this.$refs.three.rollBack(flag);
+    rollBack2(flag) {
+      this.$refs.three2.rollBack(flag);
     }
   },
   mounted() {}
@@ -48,9 +54,14 @@ export default {
 </script>
 
 <style>
+.span {
+  display: block;
+  background: rgb(228, 228, 228);
+  width: 230px;
+  height: 62px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
 .dddiv {
   border: 1px solid #000;
-  width: 300px;
-  margin-left: 300px;
 }
 </style>

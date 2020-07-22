@@ -1,10 +1,10 @@
 // 导入组件
 import MeThree from './src/three'
-import MeSurface from './src/surface'
+import MeSide from './src/side'
 // 组件列表
 const components = [
   MeThree,
-  MeSurface
+  MeSide
 ]
 
 

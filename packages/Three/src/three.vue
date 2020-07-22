@@ -1,70 +1,10 @@
 <template>
-  <div
-    class="me-three"
-    :style="{
-  transform: 'perspective('+perspective+'px) rotateX('+rotateX+'deg) rotateY('+rotateY+'deg) rotateZ('+rotateZ+'deg)',
-  transformOrigin: width/2+'px '+height/2+'px '+(-deep)/2+'px',
-  perspectiveOrigin: width/2+'px '+height/2+'px'
-  }"
-  >
-    <div
-      class="me-three-front"
-      :style="{
-      width: width+'px',
-      height: height+'px',
-    }"
-    >
-      <slot name="front"></slot>
-    </div>
-    <div
-      class="me-three-back"
-      :style="{
-      width:width+'px',
-      height:height+'px',
-      transform: 'rotateY(-180deg) translateZ('+deep+'px)'
-    }"
-    >
-      <slot name="back"></slot>
-    </div>
-    <div
-      class="me-three-top"
-      :style="{
-      width: width+'px',
-      height: deep+'px',
-      transform: 'rotateX(90deg) translateZ('+deep/2+'px) translateY('+(-deep/2)+'px)'
-    }"
-    >
-      <slot name="top"></slot>
-    </div>
-    <div
-      class="me-three-bottom"
-      :style="{
-      width: width+'px',
-      height: deep+'px',
-      transform: 'rotateX(-90deg) translateZ('+(height - deep/2)+'px) translateY('+(deep/2)+'px)'
-    }"
-    >
-      <slot name="bottom"></slot>
-    </div>
-    <div
-      class="me-three-left"
-      :style="{
-      width: deep+'px',
-      height: height+'px',
-      transform: 'rotateY(-90deg) translateZ('+(deep/2)+'px) translateX('+(-deep/2)+'px)'
-    }"
-    >
-      <slot name="left"></slot>
-    </div>
-    <div
-      class="me-three-right"
-      :style="{
-      width:deep+'px',
-      height: height+'px',
-      transform: 'rotateY(90deg) translateZ('+(width - deep/2)+'px) translateX('+(deep/2)+'px)'
-    }"
-    >
-      <slot name="right"></slot>
+  <div class="me-three" ref="thisthree" :style="{
+    width:width+'px',
+    height:height+'px'
+  }">
+    <div class="me-three-sides">
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -75,108 +15,222 @@ export default {
   components: {},
   data() {
     return {
-      perspective: 1000,
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0
+      rollBackLock: false,
+      currAction: null
     };
   },
   props: {
     width: {
-      default: 100
+      required: true
     },
     height: {
-      default: 100
+      required: true
     },
-    deep: {
-      default: 100
+    actions: {
+      type: Array
+    },
+    delay: {
+      type: [Number, String],
+      default: 3000
     }
   },
   computed: {},
   methods: {
-    evalString(code) {
-    console.log(this.rotateX, this.rotateY, this.rotateZ);
-      eval(code);
-    },
     rollBack(flag) {
-      var _rotateX = this.rotateX;
-      while (_rotateX < 0) {
-        _rotateX = _rotateX + 360;
+      if (this.rollBackLock) return;
+      this.rollBackLock = true;
+      var shape = this.$refs.thisthree;
+      var sides = shape.firstChild;
+      var sideArr = new Array(...sides.children);
+
+      var activeObj = {
+        activeNode: null,
+        activeIndex: null
+      };
+      sideArr.forEach((node, i) => {
+        if (node.className.indexOf("active") != -1) {
+          activeObj.activeNode = node;
+          activeObj.activeIndex = i;
+        }
+      });
+      var nextNode = this.getNextNode(sideArr, activeObj.activeIndex);
+
+      var separateChildWidth = this.width / 2;
+      var separateChildHeight = this.height / 2;
+
+      var styleMap = {
+        sides: {
+          left:
+            "translateX(0px) translateZ(-" +
+            separateChildWidth +
+            "px) rotateY(-90deg)",
+          right:
+            "translateX(0px) translateZ(-" +
+            separateChildWidth +
+            "px) rotateY(90deg)",
+          top:
+            "translateY(0px) translateZ(-" +
+            separateChildHeight +
+            "px) rotateX(-90deg)",
+          bottom:
+            "translateY(0px) translateZ(-" +
+            separateChildHeight +
+            "px) rotateX(90deg)"
+        },
+        nextNode: {
+          left: "rotateY(90deg) translateZ(" + separateChildWidth + "px)",
+          right: "rotateY(-90deg) translateZ(" + separateChildWidth + "px)",
+          top: "rotateX(90deg) translateZ(" + separateChildHeight + "px)",
+          bottom: "rotateX(-90deg) translateZ(" + separateChildHeight + "px)"
+        }
+      };
+
+      //star
+      shape.classList.add("animating");
+
+      //--from map
+      sides.style.transform = styleMap.sides[flag];
+
+      activeObj.activeNode.classList.add("hidden");
+      activeObj.activeNode.style.transform =
+        "rotateY(0deg) translateZ(" +
+        (flag == "top" || flag == "bottom"
+          ? separateChildHeight
+          : separateChildWidth) +
+        "px)";
+
+      //--from map
+      nextNode.classList.add("animating");
+      nextNode.style[flag == "top" || flag == "bottom" ? "top" : "left"] = 0;
+      nextNode.style.transform = styleMap.nextNode[flag];
+      //stop
+      setTimeout(() => {
+        shape.classList.remove("animating");
+
+        sides.style.transform = null;
+
+        activeObj.activeNode.classList.remove("hidden");
+        activeObj.activeNode.style.transform = null;
+
+        nextNode.classList.remove("animating");
+        nextNode.style[
+          flag == "top" || flag == "bottom" ? "top" : "left"
+        ] = null;
+        nextNode.style.transform = null;
+
+        this.nextActive(sideArr, activeObj.activeIndex);
+        this.rollBackLock = false;
+      }, 500);
+    },
+    //获取Active的下个结点
+    getNextNode(nodeList, index) {
+      return nodeList[index + 1] ? nodeList[index + 1] : nodeList[0];
+    },
+    //Active的转换
+    nextActive(nodeList, index) {
+      nodeList[index].classList.remove("active");
+      if (!nodeList[index + 1]) {
+        nodeList[0].classList.add("active");
+        return {
+          activeNode: nodeList[0],
+          activeIndex: 0
+        };
+      } else {
+        nodeList[index + 1].classList.add("active");
+        return {
+          activeNode: nodeList[index + 1],
+          activeIndex: index + 1
+        };
       }
-      switch (flag) {
-        case "left":
-          if (_rotateX % 360 == 0) {
-            this.rotateY = this.rotateY + 90;
-          } else if (_rotateX % 270 == 0) {
-            this.rotateZ = this.rotateZ + 90;
-          } else if (_rotateX % 180 == 0) {
-            this.rotateY = this.rotateY - 90;
-          } else if (_rotateX % 90 == 0) {
-            this.rotateZ = this.rotateZ - 90;
-          }
-          break;
-        case "right":
-          if (_rotateX % 360 == 0) {
-            this.rotateY = this.rotateY - 90;
-          } else if (_rotateX % 270 == 0) {
-            this.rotateZ = this.rotateZ - 90;
-          } else if (_rotateX % 180 == 0) {
-            this.rotateY = this.rotateY + 90;
-          } else if (_rotateX % 90 == 0) {
-            this.rotateZ = this.rotateZ + 90;
-          }
-          break;
-        case "top":
-          this.rotateX = this.rotateX - 90;
-          break;
-        case "bottom":
-          this.rotateX = this.rotateX + 90;
-          break;
-        default:
-          console.error("错误参数,请选择:left/right/top/bottom");
-      }
-      console.log(this.rotateX, this.rotateY, this.rotateZ);
     }
   },
   mounted() {
-    console.log(this.rotateX, this.rotateY, this.rotateZ);
+    if (this.actions) {
+      this.currAction = 0;
+    }
+    if (this.actions) {
+      setInterval(() => {
+        this.rollBack(this.actions[this.currAction]);
+        this.currAction = this.actions[this.currAction + 1]
+          ? this.currAction + 1
+          : 0;
+      }, this.delay);
+    }
   }
 };
 </script>
 
 <style lang="scss">
 .me-three {
-  $width: 120px;
-  $height: 160px;
-  $deep: 200px;
+  position: relative;
+  vertical-align: top;
   display: inline-block;
+  -webkit-perspective: 2000px;
+  perspective: 2000px;
+  -webkit-transition: left 0.6s ease-in-out, width 0.6s ease-in-out,
+    height 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+  transition: left 0.6s ease-in-out, width 0.6s ease-in-out,
+    height 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
+    width 0.6s ease-in-out, height 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
+    width 0.6s ease-in-out, height 0.6s ease-in-out,
+    -webkit-transform 0.6s ease-in-out;
+}
+
+.me-three .me-three-sides {
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  transition: transform 0.3s ease;
-  & > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    font-size: 60px;
-    color: #fff;
-  }
-  & > .me-three-top {
-    background: rgba(210, 210, 0, 0.7);
-  }
-  & > .me-three-bottom {
-    background: rgba(210, 0, 210, 0.7);
-  }
-  & > .me-three-left {
-    background: rgba(0, 0, 210, 0.7);
-  }
-  & > .me-three-right {
-    background: rgba(210, 0, 0, 0.7);
-  }
-  & > .me-three-front {
-    background: rgba(90, 90, 90, 0.7);
-  }
-  & > .me-three-back {
-    background: rgba(0, 210, 0, 0.7);
-  }
+}
+
+.me-three .active.me-side {
+  display: block;
+}
+
+.me-three .me-side {
+  display: none;
+  opacity: 1;
+  width: 100%;
+  margin: 0 !important;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.me-three .me-side * {
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+}
+
+.me-three .animating.me-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 100;
+}
+
+.me-three.animating .me-three-sides {
+  -webkit-transition: left 0.6s ease-in-out, width 0.6s ease-in-out,
+    height 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+  transition: left 0.6s ease-in-out, width 0.6s ease-in-out,
+    height 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
+    width 0.6s ease-in-out, height 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
+    width 0.6s ease-in-out, height 0.6s ease-in-out,
+    -webkit-transform 0.6s ease-in-out;
+}
+
+.me-three.animating .me-side {
+  -webkit-transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.me-three .active.me-side {
+  display: block;
+}
+
+.me-three .hidden.me-side {
+  opacity: 0.6;
 }
 </style>
