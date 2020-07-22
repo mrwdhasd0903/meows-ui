@@ -40,6 +40,7 @@ export default {
       if (this.rollBackLock) return;
       this.rollBackLock = true;
       var shape = this.$refs.thisthree;
+      if(!shape){return}
       var sides = shape.firstChild;
       var sideArr = new Array(...sides.children);
 
@@ -60,11 +61,11 @@ export default {
 
       var styleMap = {
         sides: {
-          left:
+          right:
             "translateX(0px) translateZ(-" +
             separateChildWidth +
             "px) rotateY(-90deg)",
-          right:
+          left:
             "translateX(0px) translateZ(-" +
             separateChildWidth +
             "px) rotateY(90deg)",
@@ -78,8 +79,8 @@ export default {
             "px) rotateX(90deg)"
         },
         nextNode: {
-          left: "rotateY(90deg) translateZ(" + separateChildWidth + "px)",
-          right: "rotateY(-90deg) translateZ(" + separateChildWidth + "px)",
+          right: "rotateY(90deg) translateZ(" + separateChildWidth + "px)",
+          left: "rotateY(-90deg) translateZ(" + separateChildWidth + "px)",
           top: "rotateX(90deg) translateZ(" + separateChildHeight + "px)",
           bottom: "rotateX(-90deg) translateZ(" + separateChildHeight + "px)"
         }

@@ -8,9 +8,7 @@
         :to="item.link"
       >{{item.text}}</router-link>
     </p>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -31,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-span{
+span {
   margin: 20px;
   cursor: pointer;
 }

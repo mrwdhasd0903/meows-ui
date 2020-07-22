@@ -20,6 +20,7 @@ export default {
 <style lang="scss">
 .me-button-group {
   display: inline-block;
+  font-size: 0px;
   $radius: 4px;
   $roundRadius: 16px;
   > .me-button {
