@@ -48,7 +48,7 @@ export default {
         activeIndex: null
       };
       sideArr.forEach((node, i) => {
-        if (node.className.indexOf("active") != -1) {
+        if (node.className.indexOf("me-side-active") != -1) {
           activeObj.activeNode = node;
           activeObj.activeIndex = i;
         }
@@ -86,7 +86,7 @@ export default {
       };
 
       //star
-      shape.classList.add("animating");
+      shape.classList.add("me-animating");
 
       //--from map
       sides.style.transform = styleMap.sides[flag];
@@ -100,19 +100,19 @@ export default {
         "px)";
 
       //--from map
-      nextNode.classList.add("animating");
+      nextNode.classList.add("me-animating");
       nextNode.style[flag == "top" || flag == "bottom" ? "top" : "left"] = 0;
       nextNode.style.transform = styleMap.nextNode[flag];
       //stop
       setTimeout(() => {
-        shape.classList.remove("animating");
+        shape.classList.remove("me-animating");
 
         sides.style.transform = null;
 
         activeObj.activeNode.classList.remove("hidden");
         activeObj.activeNode.style.transform = null;
 
-        nextNode.classList.remove("animating");
+        nextNode.classList.remove("me-animating");
         nextNode.style[
           flag == "top" || flag == "bottom" ? "top" : "left"
         ] = null;
@@ -128,15 +128,15 @@ export default {
     },
     //Active的转换
     nextActive(nodeList, index) {
-      nodeList[index].classList.remove("active");
+      nodeList[index].classList.remove("me-side-active");
       if (!nodeList[index + 1]) {
-        nodeList[0].classList.add("active");
+        nodeList[0].classList.add("me-side-active");
         return {
           activeNode: nodeList[0],
           activeIndex: 0
         };
       } else {
-        nodeList[index + 1].classList.add("active");
+        nodeList[index + 1].classList.add("me-side-active");
         return {
           activeNode: nodeList[index + 1],
           activeIndex: index + 1
@@ -145,6 +145,20 @@ export default {
     }
   },
   mounted() {
+    //检查有无active
+    var sideArr = new Array(...this.$refs.thisthree.firstChild.children);
+    var count = 0;
+    for (let item of sideArr) {
+      if (item.className.indexOf("me-side-active") != -1) {
+        break;
+      } else {
+        count++;
+      }
+    }
+    if (count == sideArr.length) {
+      sideArr[0].classList.add("me-side-active");
+    }
+    //检查有无actions
     if (this.actions) {
       this.currAction = 0;
     }
@@ -183,7 +197,7 @@ export default {
   transform-style: preserve-3d;
 }
 
-.me-three .active.me-side {
+.me-three .me-side-active.me-side {
   display: block;
 }
 
@@ -201,7 +215,7 @@ export default {
   backface-visibility: visible !important;
 }
 
-.me-three .animating.me-side {
+.me-three .me-animating.me-side {
   position: absolute;
   top: 0;
   left: 0;
@@ -209,7 +223,7 @@ export default {
   z-index: 100;
 }
 
-.me-three.animating .me-three-sides {
+.me-three.me-animating .me-three-sides {
   -webkit-transition: left 0.6s ease-in-out, width 0.6s ease-in-out,
     height 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
   transition: left 0.6s ease-in-out, width 0.6s ease-in-out,
@@ -221,12 +235,12 @@ export default {
     -webkit-transform 0.6s ease-in-out;
 }
 
-.me-three.animating .me-side {
+.me-three.me-animating .me-side {
   -webkit-transition: opacity 0.6s ease-in-out;
   transition: opacity 0.6s ease-in-out;
 }
 
-.me-three .active.me-side {
+.me-three .me-side-active.me-side {
   display: block;
 }
 

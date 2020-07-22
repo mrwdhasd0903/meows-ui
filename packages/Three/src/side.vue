@@ -1,8 +1,8 @@
 <template>
   <div class="me-side" :class="
-  {
-    active:active
-  }">
+  [{
+    'me-side-active':active
+  }]">
     <div :style="{
       width:width +'px',
       height:height +'px'

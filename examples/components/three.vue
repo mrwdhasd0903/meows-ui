@@ -1,7 +1,7 @@
 <template>
   <div class="dddiv">
     <me-three ref="three2" delay="1000" :actions="['top']" width="230" height="62">
-      <me-side active>
+      <me-side>
         <span class="span">唯有时间</span>
       </me-side>
       <me-side>
