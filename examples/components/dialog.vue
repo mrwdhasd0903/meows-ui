@@ -19,13 +19,19 @@
       <div>2</div>
       <div slot="footer" />
     </me-dialog>
-
+    <!-- @event -->
+    <me-dialog :visible.sync="v6" @close="log('close')" @sure="log('sure')" @cancel="log('cancel')"></me-dialog>
+    <!-- transition  -->
+    <!-- <me-dialog :visible.sync="v7" transition="me-fadeRotateX"></me-dialog> -->
+    <me-dialog :visible.sync="v7" transition="me-fadeToRight"></me-dialog>
     <me-button-group>
       <me-button @click="v1=!v1">v1</me-button>
       <me-button @click="v2=!v2">v2</me-button>
       <me-button @click="v3=!v3">v3</me-button>
       <me-button @click="v4=!v4">v4</me-button>
       <me-button @click="v5=!v5">v5</me-button>
+      <me-button @click="v6=!v6">v6</me-button>
+      <me-button @click="v7=!v7">v7</me-button>
     </me-button-group>
   </div>
 </template>
@@ -46,7 +52,11 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    log(v) {
+      console.log(v);
+    }
+  },
   mounted() {}
 };
 </script>

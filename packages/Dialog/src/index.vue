@@ -1,9 +1,9 @@
 <template>
   <!-- 对话框遮罩 -->
-  <transition name="dialog-fade-g">
+  <transition name="me-fade">
     <div class="me-dialog__wrapaper" v-show="visible" @click.self="handleClose">
       <!-- 动画 -->
-      <transition name="dialog-fade">
+      <transition :name="transition">
         <!-- 对话框 -->
         <div
           class="me-dialog"
@@ -17,7 +17,7 @@
             <slot name="title">
               <span class="me-dialog__title">{{title}}</span>
             </slot>
-            <button class="me-dialog__headerbtn" @click="handleClose">
+            <button class="me-dialog__headerbtn" @click="send('close')">
               <me-icon name="i-fanhui-a" class="me-icon-close"></me-icon>
             </button>
           </div>
@@ -26,8 +26,8 @@
           </div>
           <div class="me-dialog__footer">
             <slot name="footer">
-              <me-button @click="handleClose">确定</me-button>
-              <me-button outer>取消</me-button>
+              <me-button @click="send('sure')">确定</me-button>
+              <me-button @click="send('cancel')" outer>取消</me-button>
             </slot>
           </div>
         </div>
@@ -43,6 +43,10 @@ export default {
     title: {
       type: String,
       default: "提示"
+    },
+    transition: {
+      type: String,
+      default: "me-fadeToUp"
     },
     width: {
       type: String,
@@ -60,6 +64,10 @@ export default {
   methods: {
     handleClose() {
       this.$emit("update:visible", false);
+    },
+    send(flag) {
+      this.$emit(flag);
+      this.handleClose();
     }
   }
 };
@@ -122,35 +130,35 @@ export default {
     }
   }
 }
-.dialog-fade-enter-active {
-  animation: fade 0.2s ease;
-}
-.dialog-fade-leave-active {
-  animation: fade 0.2s reverse ease;
-}
+// .dialog-fade-enter-active {
+//   animation: fade 0.2s ease;
+// }
+// .dialog-fade-leave-active {
+//   animation: fade 0.2s reverse ease;
+// }
 
-.dialog-fade-g-enter-active {
-  animation: fade-g 0.2s ease;
-}
-.dialog-fade-g-leave-active {
-  animation: fade-g 0.2s reverse ease;
-}
-@keyframes fade-g {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fade {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
+// .dialog-fade-g-enter-active {
+//   animation: fade-g 0.2s ease;
+// }
+// .dialog-fade-g-leave-active {
+//   animation: fade-g 0.2s reverse ease;
+// }
+// @keyframes fade-g {
+//   0% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+// @keyframes fade {
+//   0% {
+//     opacity: 0;
+//     transform: translateY(-20px);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateY(0px);
+//   }
+// }
 </style>

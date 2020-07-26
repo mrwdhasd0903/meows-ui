@@ -1,0 +1,137 @@
+.me-fade-enter-active {
+  animation: fade 0.2s ease;
+}
+
+.me-fade-leave-active {
+  animation: fade 0.2s ease reverse;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.me-fadeToUp-enter-active {
+  animation: fadeToUp 0.2s ease;
+}
+
+.me-fadeToUp-leave-active {
+  animation: fadeToUp 0.2s ease reverse;
+}
+
+@keyframes fadeToUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.me-fadeRotateX-enter-active {
+  animation: fadeRotateX 0.2s ease;
+}
+
+.me-fadeRotateX-leave-active {
+  animation: fadeRotateX 0.2s ease reverse;
+}
+
+@keyframes fadeRotateX {
+  0% {
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg);
+  }
+}
+
+.me-fadescale-enter-active {
+  animation: scale 0.2s ease;
+}
+
+.me-fadescale-leave-active {
+  animation: scale 0.2s ease reverse;
+}
+
+@keyframes scale {
+  0% {
+    opacity: 0;
+    transform: scale(2, 2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+
+.me-fadeRotateY-enter-active {
+  animation: rotateY 0.2s ease;
+}
+
+.me-fadeRotateY-leave-active {
+  animation: rotateY 0.2s ease reverse;
+}
+
+@keyframes rotateY {
+  0% {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+
+.me-fadeToLeft-enter-active {
+  animation: fadeToLeft 0.2s ease;
+}
+
+.me-fadeToLeft-leave-active {
+  animation: fadeToLeft 0.2s ease reverse;
+}
+
+@keyframes fadeToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.me-fadeToRight-enter-active {
+  animation: fadeToRight 0.2s ease;
+}
+
+.me-fadeToRight-leave-active {
+  animation: fadeToRight 0.2s ease reverse;
+}
+
+@keyframes fadeToRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}

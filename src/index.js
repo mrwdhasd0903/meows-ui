@@ -4,6 +4,7 @@ import Layout from '../packages/Layout'
 import Three from '../packages/Three'
 import Dialog from '../packages/Dialog'
 import '../packages/Theme/index.css'
+import '../packages/Theme/transition.css'
 import {
   setCdn
 } from '../packages/Jsx'
