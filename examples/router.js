@@ -27,6 +27,9 @@ const router = new VueRouter({
   },{
     path:'/three',
     component:()=>import("./components/three")
+  },{
+    path:'/dialog',
+    component:()=>import("./components/dialog")
   }],
   mode: 'history'
 })
