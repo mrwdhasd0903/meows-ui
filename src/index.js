@@ -3,6 +3,7 @@ import Icon from '../packages/Icon'
 import Layout from '../packages/Layout'
 import Three from '../packages/Three'
 import Dialog from '../packages/Dialog'
+import Input from '../packages/Input'
 import '../packages/Theme/index.css'
 import '../packages/Theme/transition.css'
 import {
@@ -16,7 +17,8 @@ const components = [
   ...Icon,
   ...Layout,
   ...Three,
-  ...Dialog
+  ...Dialog,
+  ...Input
 ]
 
 // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，那么所有的组件都会被注册

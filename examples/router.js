@@ -14,22 +14,25 @@ const router = new VueRouter({
   routes: [{
     path: '/',
     // 重定向
-    redirect: '/three'
-  },{
-    path:'/button',
-    component:()=>import("./components/button")
-  },{
-    path:'/icon',
-    component:()=>import("./components/icon")
-  },{
-    path:'/layout',
-    component:()=>import("./components/layout")
-  },{
-    path:'/three',
-    component:()=>import("./components/three")
-  },{
-    path:'/dialog',
-    component:()=>import("./components/dialog")
+    redirect: '/input'
+  }, {
+    path: '/button',
+    component: () => import("./components/button")
+  }, {
+    path: '/icon',
+    component: () => import("./components/icon")
+  }, {
+    path: '/layout',
+    component: () => import("./components/layout")
+  }, {
+    path: '/three',
+    component: () => import("./components/three")
+  }, {
+    path: '/dialog',
+    component: () => import("./components/dialog")
+  }, {
+    path: '/input',
+    component: () => import("./components/input")
   }],
   mode: 'history'
 })

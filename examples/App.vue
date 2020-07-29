@@ -22,7 +22,8 @@ export default {
         { link: "/icon", text: "图标" },
         { link: "/layout", text: "布局" },
         { link: "/three", text: "魔方" },
-        { link: "/dialog", text: "对话框" }
+        { link: "/dialog", text: "对话框" },
+        { link: "/input", text: "输出框" }
       ]
     };
   }
