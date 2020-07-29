@@ -18,7 +18,7 @@
               <span class="me-dialog__title">{{title}}</span>
             </slot>
             <button class="me-dialog__headerbtn" @click="send('close')">
-              <me-icon name="i-fanhui-a" class="me-icon-close"></me-icon>
+              <me-icon name="i-chuangkou-guanbi-2" class="me-icon-close"></me-icon>
             </button>
           </div>
           <div class="me-dialog__body">
