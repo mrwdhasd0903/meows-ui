@@ -11,7 +11,8 @@
   }"
   >
     <input
-      :class="[{
+      :class="[
+      'me-type--'+borderType,{
       'me-disabled':disabled,
     }]"
       :disabled="disabled"
@@ -46,6 +47,10 @@ export default {
     width: {
       type: String,
       default: null
+    },
+    borderType: {
+      type: String,
+      default: "ordinary"
     },
     size: {
       type: String,
@@ -94,7 +99,7 @@ export default {
     },
     clear() {
       console.log(123);
-      
+
       this.$emit("input", "");
     }
   }
@@ -103,41 +108,59 @@ export default {
 
 <style lang='scss'>
 @import "../../theme/color.scss";
+@mixin me-size($size) {
+  height: $size;
+  .me-input__suffix {
+    line-height: $size;
+  }
+  .me-input__inner {
+    height: $size;
+    line-height: $size;
+  }
+}
+.me-input {
+  &.me-size--standard {
+    @include me-size(36px);
+  }
+  &.me-size--mini {
+    @include me-size(30px);
+  }
+  &.me-size--big {
+    @include me-size(40px);
+  }
+}
+.me-input {
+  .me-type--ordinary:focus {
+    border-color: $柚青;
+  }
+  .me-type--success:focus {
+    border-color: $靛青;
+  }
+  .me-type--warning:focus {
+    border-color: $藤黄;
+  }
+  .me-type--youth:focus {
+    border-color: $石榴红;
+  }
+  .me-type--important:focus {
+    border-color: $翡翠色;
+  }
+  .me-type--dynamic:focus {
+    border-color: $橘红;
+  }
+  .me-type--plain:focus {
+    border-color: $奶灰;
+  }
+  .me-type--elegant:focus {
+    border-color: $漆黑;
+  }
+}
 .me-input {
   width: 100%;
   position: relative;
   font-size: 14px;
   display: inline-block;
-  &.me-size--standard {
-    height: 36px;
-    .me-input__suffix {
-      line-height: 36px;
-    }
-    .me-input__inner {
-      height: 36px;
-      line-height: 36px;
-    }
-  }
-  &.me-size--mini {
-    height: 30px;
-    .me-input__suffix {
-      line-height: 30px;
-    }
-    .me-input__inner {
-      height: 30px;
-      line-height: 30px;
-    }
-  }
-  &.me-size--big {
-    height: 40px;
-    .me-input__suffix {
-      line-height: 40px;
-    }
-    .me-input__inner {
-      height: 40px;
-      line-height: 40px;
-    }
-  }
+
   .me-input__inner {
     -webkit-appearance: none;
     background-color: #fff;
@@ -153,7 +176,7 @@ export default {
     width: 100%;
     &:focus {
       outline: none;
-      border-color: #4093ff;
+      // border-color: #41b17e;
     }
     &.me-disabled {
       cursor: not-allowed;

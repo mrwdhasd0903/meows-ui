@@ -1,6 +1,13 @@
 <template>
   <div class>
-    <me-input placeholder="请输入内容"></me-input>
+    <me-input border-type='ordinary' placeholder="请输入内容"></me-input>
+    <me-input border-type='success' placeholder="请输入内容"></me-input>
+    <me-input border-type='warning' placeholder="请输入内容"></me-input>
+    <me-input border-type='youth' placeholder="请输入内容"></me-input>
+    <me-input border-type='important' placeholder="请输入内容"></me-input>
+    <me-input border-type='dynamic' placeholder="请输入内容"></me-input>
+    <me-input border-type='plain' placeholder="请输入内容"></me-input>
+    <me-input border-type='elegant' placeholder="请输入内容"></me-input>
     <me-input placeholder="密码" type="password"></me-input>
     <me-input placeholder="禁用" v-model="username" disabled></me-input>
     <me-input placeholder="v-model" v-model="username"></me-input>
