@@ -17,7 +17,6 @@
     }
     ]"
     @click="disabled?'':$emit('click')"
-
   >
     <me-icon v-if="icon && !loading" :name="icon" />
     <me-icon v-if="loading" class="me-loading" :name="loadingIcon"></me-icon>
@@ -201,29 +200,6 @@ export default {
   }
 }
 .me-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-  padding: 0 1em;
-  border-radius: 4px;
-  font-size: 14px;
-  outline: none;
-  color: #fff;
-  fill: #fff;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &.me-size--standard {
-    height: 36px;
-  }
-  &.me-size--mini {
-    height: 30px;
-  }
-  &.me-size--big {
-    height: 40px;
-  }
-
   &.me-type--ordinary {
     @include me-type($柚青, $柚青_, $柚青__, $_柚青);
   }
@@ -247,6 +223,31 @@ export default {
   }
   &.me-type--elegant {
     @include me-type($漆黑, $漆黑_, $漆黑__, $_漆黑);
+  }
+}
+.me-button {
+  // transform: translateY(-1px);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  padding: 0 1em;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  color: #fff;
+  fill: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.me-size--standard {
+    height: 36px;
+  }
+  &.me-size--mini {
+    height: 30px;
+  }
+  &.me-size--big {
+    height: 40px;
   }
 
   &.me-icon--left {
@@ -300,7 +301,7 @@ export default {
   .me-loading {
     animation: rotate 1s infinite linear;
   }
-  &.me-full{
+  &.me-full {
     width: 100%;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <svg v-if="name" :style="{fill:fill}" class="me-icon">
+  <svg v-if="name" :style="{fill:fill}" @click="$emit('click')" class="me-icon">
     <use :xlink:href="'#'+name" />
   </svg>
 </template>
