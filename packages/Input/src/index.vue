@@ -12,7 +12,7 @@
   >
     <input
       :class="[
-      'me-type--'+borderType,{
+      'me-type--'+activeLight,{
       'me-disabled':disabled,
     }]"
       :disabled="disabled"
@@ -21,6 +21,8 @@
       :name="name"
       :value="value"
       @input="(e)=>{$emit('input',e.target.value)}"
+      @focus="()=>{$emit('focus')}"
+      @blur="()=>{$emit('blur')}"
       class="me-input__inner"
     />
     <span class="me-input__suffix" v-if="showSuffix">
@@ -48,7 +50,7 @@ export default {
       type: String,
       default: null
     },
-    borderType: {
+    activeLight: {
       type: String,
       default: "ordinary"
     },
@@ -98,8 +100,7 @@ export default {
       this.passwordVisible = !this.passwordVisible;
     },
     clear() {
-      console.log(123);
-
+      this.$emit("clear");
       this.$emit("input", "");
     }
   }
