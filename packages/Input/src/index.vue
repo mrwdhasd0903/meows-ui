@@ -4,13 +4,15 @@
     :class="[
     'me-size--'+size,
     {
-    'me-input--suffix':showSuffix
   }]"
     :style="{
     'width':width
   }"
   >
     <input
+      :style="
+    {paddingRight:innerPaddingRight}
+    "
       :class="[
       'me-type--'+activeLight,{
       'me-disabled':disabled,
@@ -20,16 +22,19 @@
       :type="showPwd?(passwordVisible?'text':'password'):type"
       :name="name"
       :value="value"
+      :maxlength="maxlength"
       @input="(e)=>{$emit('input',e.target.value)}"
       @focus="()=>{$emit('focus')}"
+      @keydown="keydown"
       @blur="()=>{$emit('blur')}"
       class="me-input__inner"
     />
     <span class="me-input__suffix" v-if="showSuffix">
-      <me-icon name="i-chuangkou-guanbi-1" v-if="clearable&&value!=''" @click="clear"></me-icon>
+      <span v-if="showCount">{{count}}</span>
+      <me-icon name="i-chuangkou-guanbi-1" v-if="showClear" @click="clear"></me-icon>
       <me-icon
         :name="'i-yanjing-'+(passwordVisible?'off':'on')"
-        v-if="showPwd&&type=='password'"
+        v-if="showShowPwd"
         @click="handlePwd"
       ></me-icon>
     </span>
@@ -46,6 +51,14 @@ export default {
     };
   },
   props: {
+    maxlength: {
+      type: [String, Number],
+      default: null
+    },
+    showCount: {
+      type: Boolean,
+      default: false
+    },
     width: {
       type: String,
       default: null
@@ -91,11 +104,38 @@ export default {
     }
   },
   computed: {
+    innerPaddingRight() {
+      let res = 0;
+      if (this.showShowPwd) {
+        res += 25;
+      }
+      if (this.showClear) {
+        res += 25;
+      }
+      if (this.showCount) {
+        res += 40;
+      }
+      return res + "px";
+    },
+    showClear() {
+      return this.clearable && this.value != "";
+    },
+    showShowPwd() {
+      return this.showPwd && this.type == "password";
+    },
+    count() {
+      return this.value.length + (this.maxlength ? "/" + this.maxlength : "");
+    },
     showSuffix() {
-      return this.clearable || this.showPwd;
+      return this.clearable || this.showPwd || this.showCount;
     }
   },
   methods: {
+    keydown(e) {
+      if (e.keyCode === 13) {
+        this.$emit("enter");
+      }
+    },
     handlePwd() {
       this.passwordVisible = !this.passwordVisible;
     },
@@ -185,20 +225,18 @@ export default {
       border-color: #e4e7ed;
     }
   }
-}
-.me-input--suffix {
-  .me-input__inner {
-    padding-right: 50px;
-  }
   .me-input__suffix {
     position: absolute;
     height: 100%;
-    right: 10px;
+    right: 6px;
     top: 0px;
     text-align: center;
     color: #c0c4cc;
     transition: all 0.2s;
     z-index: 900;
+    span {
+      vertical-align: middle;
+    }
     .me-icon {
       margin-left: 4px;
       fill: #c0c4cc;

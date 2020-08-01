@@ -38,8 +38,19 @@
       @input="log('input')"
       @focus="log('focus')"
       @clear="log('clear')"
+      @enter="log('keydown')"
       clearable
       placeholder="focus & blur"
+    ></me-input>
+    <me-input
+      v-model="username"
+      maxlength="10"
+      width='200px'
+      placeholder="maxlength"
+      type="password"
+      show-count
+      clearable
+      show-pwd
     ></me-input>
   </div>
 </template>
