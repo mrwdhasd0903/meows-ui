@@ -140,8 +140,8 @@ export default {
       this.passwordVisible = !this.passwordVisible;
     },
     clear() {
-      this.$emit("clear");
       this.$emit("input", "");
+      this.$emit("clear");
     }
   }
 };
