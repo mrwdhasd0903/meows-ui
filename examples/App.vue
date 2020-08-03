@@ -23,7 +23,8 @@ export default {
         { link: "/layout", text: "布局" },
         { link: "/three", text: "魔方" },
         { link: "/dialog", text: "对话框" },
-        { link: "/input", text: "输出框" }
+        { link: "/input", text: "输入框" },
+        { link: "/switch", text: "开关" }
       ]
     };
   }

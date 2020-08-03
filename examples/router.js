@@ -14,7 +14,7 @@ const router = new VueRouter({
   routes: [{
     path: '/',
     // 重定向
-    redirect: '/input'
+    redirect: '/switch'
   }, {
     path: '/button',
     component: () => import("./components/button")
@@ -33,6 +33,9 @@ const router = new VueRouter({
   }, {
     path: '/input',
     component: () => import("./components/input")
+  }, {
+    path: '/switch',
+    component: () => import("./components/switch")
   }],
   mode: 'history'
 })
