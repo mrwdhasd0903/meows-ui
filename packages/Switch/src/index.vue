@@ -1,6 +1,9 @@
 <template>
-  <div class="me-switch">
-    <span class="me-switch__core">
+  <div class="me-switch" :class="{
+    'me-checked':value
+  }" @click="handleClick">
+    <input class="me-switch__input" type="checkbox" ref="input" :name="name" />
+    <span class="me-switch__core" ref="core">
       <span class="me-switch__button"></span>
     </span>
   </div>
@@ -10,12 +13,50 @@
 export default {
   name: "MeSwitch",
   components: {},
-  data() {
-    return {};
+  props: {
+    name: {
+      type: String,
+      defualt: ""
+    },
+    value: {
+      type: Boolean,
+      defualt: false
+    },
+    activeColor: {
+      type: String,
+      defualt: ""
+    },
+    inactiveColor: {
+      type: String,
+      defualt: ""
+    }
+  },
+  mounted() {
+    this.setColor();
+    this.setCheck();
   },
   computed: {},
-  methods: {},
-  mounted() {}
+  methods: {
+    async handleClick() {
+      this.$emit("input", !this.value);
+      //等待value值更新
+      await this.$nextTick();
+      this.setColor();
+      this.setCheck();
+    },
+    setCheck() {
+      //同步input
+      this.$refs.input.checked = this.value;
+    },
+    setColor() {
+      //修改颜色
+      if (this.activeColor || this.inactiveColor) {
+        let color = this.value ? this.activeColor : this.inactiveColor;
+        this.$refs.core.style.borderColor = color;
+        this.$refs.core.style.backgroundColor = color;
+      }
+    }
+  }
 };
 </script>
 
@@ -28,6 +69,13 @@ export default {
   line-height: 20px;
   height: 20px;
   vertical-align: middle;
+  .me-switch__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+  }
   .me-switch__core {
     margin: 0;
     display: inline-block;
@@ -51,6 +99,15 @@ export default {
       width: 16px;
       height: 16px;
       background-color: #fff;
+    }
+  }
+}
+.me-switch.me-checked {
+  .me-switch__core {
+    border-color: #409eff;
+    background-color: #409eff;
+    .me-switch__button {
+      transform: translateX(20px);
     }
   }
 }

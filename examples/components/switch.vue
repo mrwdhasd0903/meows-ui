@@ -1,6 +1,6 @@
 <template>
   <div class>
-    <me-switch></me-switch>
+    <me-switch v-model="active" name="gender" active-color="red" inactive-color="green"></me-switch>
   </div>
 </template>
 
@@ -9,7 +9,9 @@ export default {
   name: "",
   components: {},
   data() {
-    return {};
+    return {
+      active: true
+    };
   },
   computed: {},
   methods: {},

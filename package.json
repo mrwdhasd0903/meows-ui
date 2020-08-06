@@ -6,6 +6,7 @@
   "author": {
     "name": "王达浩"
   },
+  "license":"MIT",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
