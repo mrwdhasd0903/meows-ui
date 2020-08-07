@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import themeMap from "../../Theme/color";
 export default {
   name: "MeSwitch",
   components: {},
@@ -35,14 +36,31 @@ export default {
     this.setColor();
     this.setCheck();
   },
-  computed: {},
-  methods: {
-    async handleClick() {
-      this.$emit("input", !this.value);
-      //等待value值更新
-      await this.$nextTick();
+  watch: {
+    value() {
       this.setColor();
       this.setCheck();
+    }
+  },
+  computed: {
+    _activeColor() {
+      if (this.activeColor == null) {
+        return themeMap.ordinary;
+      }
+      let res = themeMap[this.activeColor];
+      return res ? res : this.activeColor;
+    },
+    _inactiveColor() {
+      if (this.inactiveColor == null) {
+        return themeMap.plain;
+      }
+      let res = themeMap[this.inactiveColor];
+      return res ? res : this.inactiveColor;
+    }
+  },
+  methods: {
+    handleClick() {
+      this.$emit("input", !this.value);
     },
     setCheck() {
       //同步input
@@ -50,11 +68,9 @@ export default {
     },
     setColor() {
       //修改颜色
-      if (this.activeColor || this.inactiveColor) {
-        let color = this.value ? this.activeColor : this.inactiveColor;
-        this.$refs.core.style.borderColor = color;
-        this.$refs.core.style.backgroundColor = color;
-      }
+      let color = this.value ? this._activeColor : this._inactiveColor;
+      this.$refs.core.style.borderColor = color;
+      this.$refs.core.style.backgroundColor = color;
     }
   }
 };
@@ -86,7 +102,7 @@ export default {
     outline: none;
     border-radius: 10px;
     box-sizing: border-box;
-    background: #dcdfe6;
+    // background: #dcdfe6;
     cursor: pointer;
     transition: border-color 0.3s, background-color 0.3s;
     vertical-align: middle;
@@ -104,8 +120,8 @@ export default {
 }
 .me-switch.me-checked {
   .me-switch__core {
-    border-color: #409eff;
-    background-color: #409eff;
+    // border-color: #409eff;
+    // background-color: #409eff;
     .me-switch__button {
       transform: translateX(20px);
     }
