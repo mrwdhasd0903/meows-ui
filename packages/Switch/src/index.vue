@@ -3,7 +3,9 @@
     'me-checked':value
   }" @click="handleClick">
     <input class="me-switch__input" type="checkbox" ref="input" :name="name" />
-    <span class="me-switch__core" ref="core">
+    <span class="me-switch__core" :class="[
+    'me-switch-type--'+type
+    ]" ref="core">
       <span class="me-switch__button"></span>
     </span>
   </div>
@@ -15,21 +17,25 @@ export default {
   name: "MeSwitch",
   components: {},
   props: {
+    type: {
+      type: String,
+      default: "default"
+    },
     name: {
       type: String,
-      defualt: ""
+      default: ""
     },
     value: {
       type: Boolean,
-      defualt: false
+      default: false
     },
     activeColor: {
       type: String,
-      defualt: ""
+      default: ""
     },
     inactiveColor: {
       type: String,
-      defualt: ""
+      default: ""
     }
   },
   mounted() {
@@ -44,14 +50,14 @@ export default {
   },
   computed: {
     _activeColor() {
-      if (this.activeColor == null) {
+      if (this.activeColor == "") {
         return themeMap.ordinary;
       }
       let res = themeMap[this.activeColor];
       return res ? res : this.activeColor;
     },
     _inactiveColor() {
-      if (this.inactiveColor == null) {
+      if (this.inactiveColor == "") {
         return themeMap.plain;
       }
       let res = themeMap[this.inactiveColor];
@@ -97,7 +103,7 @@ export default {
     display: inline-block;
     position: relative;
     width: 40px;
-    height: 20px;
+    // height: 20px;
     border: 1px solid #dcdfe6;
     outline: none;
     border-radius: 10px;
@@ -108,13 +114,31 @@ export default {
     vertical-align: middle;
     .me-switch__button {
       position: absolute;
-      top: 1px;
+      // top: 1px;
       left: 1px;
       border-radius: 100%;
       transition: all 0.3s;
       width: 16px;
       height: 16px;
       background-color: #fff;
+    }
+  }
+  .me-switch-type--default {
+    height: 20px;
+    .me-switch__button {
+      top: 1px;
+    }
+  }
+  .me-switch-type--line {
+    height: 4px;
+    width: 30px;
+    margin: 0 5px;
+    .me-switch__button {
+      left: -6px;
+      top: -7px;
+      border: 1px solid rgb(230, 230, 230);
+      background: linear-gradient(145deg, #c7c7c7, #ffffff);
+      box-shadow: 1px 1px 0px #a5a5a5, -1px 1px 0px #b5b5b5;
     }
   }
 }
@@ -124,6 +148,11 @@ export default {
     // background-color: #409eff;
     .me-switch__button {
       transform: translateX(20px);
+    }
+  }
+  .me-switch-type--line {
+    .me-switch__button {
+      transform: translateX(24px);
     }
   }
 }
