@@ -5,8 +5,8 @@
     <me-switch v-model="active" active-color="success" inactive-color="warning"></me-switch>
     <me-switch v-model="active"></me-switch>
     <me-switch v-model="active" type="line"></me-switch>
-    <me-switch v-model="active"></me-switch>
-
+    <me-switch v-model="active" @click="asd"></me-switch>
+    <me-switch v-model="active" @click="asd" disabled></me-switch>
   </div>
 </template>
 
@@ -20,7 +20,11 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    asd(a) {
+      console.log(a);
+    }
+  },
   mounted() {}
 };
 </script>

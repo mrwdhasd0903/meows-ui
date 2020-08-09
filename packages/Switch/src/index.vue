@@ -1,7 +1,12 @@
 <template>
-  <div class="me-switch" :class="{
-    'me-checked':value
-  }" @click="handleClick">
+  <div
+    class="me-switch"
+    :class="{
+    'me-checked':value,
+    'me-disabled':disabled
+  }"
+    @click="handleClick"
+  >
     <input class="me-switch__input" type="checkbox" ref="input" :name="name" />
     <span class="me-switch__core" :class="[
     'me-switch-type--'+type
@@ -17,6 +22,10 @@ export default {
   name: "MeSwitch",
   components: {},
   props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     type: {
       type: String,
       default: "default"
@@ -66,7 +75,13 @@ export default {
   },
   methods: {
     handleClick() {
+      if (this.disabled) {
+        return null;
+      }
       this.$emit("input", !this.value);
+      this.$nextTick(() => {
+        this.$emit("click", this.value);
+      });
     },
     setCheck() {
       //同步input
@@ -84,6 +99,10 @@ export default {
 
 <style lang="scss">
 .me-switch {
+  &.me-disabled {
+    cursor: not-allowed;
+  }
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   position: relative;
@@ -109,7 +128,6 @@ export default {
     border-radius: 10px;
     box-sizing: border-box;
     // background: #dcdfe6;
-    cursor: pointer;
     transition: border-color 0.3s, background-color 0.3s;
     vertical-align: middle;
     .me-switch__button {
@@ -138,7 +156,7 @@ export default {
       top: -7px;
       border: 1px solid rgb(230, 230, 230);
       background: linear-gradient(145deg, #c7c7c7, #ffffff);
-      box-shadow: 1px 1px 0px #a5a5a5, -1px 1px 0px #b5b5b5;
+      box-shadow: 1px 1px 0px #b5b5b5;
     }
   }
 }
