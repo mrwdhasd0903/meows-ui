@@ -11,6 +11,7 @@
     <span class="me-switch__core" :class="[
     'me-switch-type--'+type
     ]" ref="core">
+      <div v-if="disabled" class="me-mask" />
       <span class="me-switch__button"></span>
     </span>
   </div>
@@ -90,7 +91,7 @@ export default {
     setColor() {
       //修改颜色
       let color = this.value ? this._activeColor : this._inactiveColor;
-      this.$refs.core.style.borderColor = color;
+      // this.$refs.core.style.borderColor = color;
       this.$refs.core.style.backgroundColor = color;
     }
   }
@@ -99,6 +100,13 @@ export default {
 
 <style lang="scss">
 .me-switch {
+  .me-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0.5;
+  }
   &.me-disabled {
     cursor: not-allowed;
   }
@@ -123,7 +131,7 @@ export default {
     position: relative;
     width: 40px;
     // height: 20px;
-    border: 1px solid #dcdfe6;
+    // border: 1px solid #dcdfe6;
     outline: none;
     border-radius: 10px;
     box-sizing: border-box;
@@ -144,7 +152,7 @@ export default {
   .me-switch-type--default {
     height: 20px;
     .me-switch__button {
-      top: 1px;
+      top: 2px;
     }
   }
   .me-switch-type--line {

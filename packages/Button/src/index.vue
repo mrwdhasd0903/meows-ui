@@ -23,6 +23,7 @@
     <div class="me-content">
       <slot />
     </div>
+    <div v-if="disabled" class="me-mask" />
   </button>
 </template>
 
@@ -225,8 +226,17 @@ export default {
     @include me-type($漆黑, $漆黑_, $漆黑__, $_漆黑);
   }
 }
+
 .me-button {
-  // transform: translateY(-1px);
+  .me-mask {
+    position: absolute;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    background: #fff;
+    opacity: 0.5;
+    border-radius: 4px;
+  }
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
