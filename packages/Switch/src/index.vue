@@ -141,7 +141,7 @@ export default {
     .me-switch__button {
       position: absolute;
       // top: 1px;
-      left: 1px;
+      left: 2px;
       border-radius: 100%;
       transition: all 0.3s;
       width: 16px;
@@ -160,7 +160,7 @@ export default {
     width: 30px;
     margin: 0 5px;
     .me-switch__button {
-      left: -6px;
+      left: -5px;
       top: -7px;
       border: 1px solid rgb(230, 230, 230);
       background: linear-gradient(145deg, #c7c7c7, #ffffff);
