@@ -1,5 +1,5 @@
 <template>
-  <div class>Radio
+  <div class>
     <me-radio></me-radio>
   </div>
 </template>
