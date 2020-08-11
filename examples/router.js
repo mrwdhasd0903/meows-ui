@@ -16,6 +16,9 @@ const router = new VueRouter({
     // 重定向
     redirect: '/switch'
   }, {
+    path: '/radio',
+    component: () => import("./components/radio")
+  }, {
     path: '/button',
     component: () => import("./components/button")
   }, {

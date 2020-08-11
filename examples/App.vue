@@ -24,7 +24,8 @@ export default {
         { link: "/three", text: "魔方" },
         { link: "/dialog", text: "对话框" },
         { link: "/input", text: "输入框" },
-        { link: "/switch", text: "开关" }
+        { link: "/switch", text: "开关" },
+        { link: "/radio", text: "单选框" }
       ]
     };
   }
