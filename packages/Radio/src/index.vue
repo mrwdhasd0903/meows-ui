@@ -1,21 +1,45 @@
 <template>
-  <label class="me-radio">
+  <label class="me-radio" :class="{'me-checked':label===value}">
     <span class="me-radio__input">
       <span class="me-radio__inner"></span>
-      <input type="radio" name class="me-radio__original" />
+      <input type="radio" class="me-radio__original" :name="name" :value="label" v-model="model" />
     </span>
-    <span class="me-radio__label">我是label</span>
+    <span class="me-radio__label">
+      <slot>{{label}}</slot>
+      <!-- <template v-if="!$slots.default"></template> -->
+    </span>
   </label>
 </template>
 
 <script>
 export default {
   name: "MeRadio",
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        //触发父组件input事件
+        this.$emit("input", value);
+      }
+    }
+  },
+  props: {
+    label: {
+      type: [String, Number, Boolean],
+      default: ""
+    },
+    value: null,
+    name: {
+      type: String,
+      default: ""
+    }
+  },
   components: {},
   data() {
     return {};
   },
-  computed: {},
   methods: {},
   mounted() {}
 };
@@ -23,6 +47,21 @@ export default {
 
 <style lang="scss">
 .me-radio {
+  &.me-checked {
+    .me-radio__input {
+      .me-radio__inner {
+        border-color: #409eff;
+        background: #409eff;
+        &:after {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+    }
+
+    .me-radio__label {
+      color: #409eff;
+    }
+  }
   color: #606266;
   font-weight: 500;
   line-height: 1;
