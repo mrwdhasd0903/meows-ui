@@ -1,7 +1,7 @@
 <template>
   <label class="me-radio" :class="{'me-checked':label===value}">
     <span class="me-radio__input">
-      <span class="me-radio__inner"></span>
+      <span class="me-radio__inner" :class="[shape?'me-radio-shape--'+shape:'']"></span>
       <input type="radio" class="me-radio__original" :name="name" :value="label" v-model="model" />
     </span>
     <span class="me-radio__label">
@@ -26,6 +26,9 @@ export default {
     }
   },
   props: {
+    shape: {
+      type: String
+    },
     label: {
       type: [String, Number, Boolean],
       default: ""
@@ -102,6 +105,12 @@ export default {
         top: 50%;
         transform: translate(-50%, -50%) scale(0);
         transition: transform 0.2s ease-in;
+      }
+    }
+    .me-radio-shape--square {
+      border-radius: 2px;
+      &:after {
+        border-radius: 0px;
       }
     }
     .me-radio__original {
