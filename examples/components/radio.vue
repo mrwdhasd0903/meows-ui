@@ -6,6 +6,15 @@
     <me-radio label="女" v-model="gender" />
 
     <me-radio label="女" v-model="gender" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="ordinary" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="success" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="warning" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="youth" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="important" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="dynamic" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="plain" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="elegant" shape="square" />
+    <me-radio label="女" v-model="gender" active-color="red" shape="square" />
     {{gender}}
   </div>
 </template>

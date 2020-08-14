@@ -1,20 +1,45 @@
 <template>
-  <label class="me-radio" :class="{'me-checked':label===value}">
+  <label class="me-radio" :class="{'me-checked':isChecked}">
     <span class="me-radio__input">
-      <span class="me-radio__inner" :class="[shape?'me-radio-shape--'+shape:'']"></span>
+      <span
+        class="me-radio__inner"
+        :class="[shape?'me-radio-shape--'+shape:'']"
+        :style="activeStyle[0]"
+      ></span>
       <input type="radio" class="me-radio__original" :name="name" :value="label" v-model="model" />
     </span>
-    <span class="me-radio__label">
+    <span class="me-radio__label" :style="activeStyle[1]">
       <slot>{{label}}</slot>
-      <!-- <template v-if="!$slots.default"></template> -->
     </span>
   </label>
 </template>
 
 <script>
+import themeMap from "../../Theme/color";
 export default {
   name: "MeRadio",
   computed: {
+    isChecked() {
+      return this.label === this.value;
+    },
+    _activeColor() {
+      if (this.activeColor == "") {
+        return themeMap.ordinary;
+      }
+      let res = themeMap[this.activeColor];
+      return res ? res : this.activeColor;
+    },
+    activeStyle() {
+      return this.isChecked
+        ? [
+            {
+              borderColor: this._activeColor,
+              backgroundColor: this._activeColor
+            },
+            { color: this._activeColor }
+          ]
+        : [null, null];
+    },
     model: {
       get() {
         return this.value;
@@ -29,6 +54,10 @@ export default {
     shape: {
       type: String
     },
+    activeColor: {
+      type: String,
+      default: ""
+    },
     label: {
       type: [String, Number, Boolean],
       default: ""
@@ -39,31 +68,14 @@ export default {
       default: ""
     }
   },
-  components: {},
-  data() {
-    return {};
-  },
-  methods: {},
-  mounted() {}
+  methods: {}
 };
 </script>
 
 <style lang="scss">
 .me-radio {
-  &.me-checked {
-    .me-radio__input {
-      .me-radio__inner {
-        border-color: #409eff;
-        background: #409eff;
-        &:after {
-          transform: translate(-50%, -50%) scale(1);
-        }
-      }
-    }
-
-    .me-radio__label {
-      color: #409eff;
-    }
+  &.me-checked .me-radio__input .me-radio__inner:after {
+    transform: translate(-50%, -50%) scale(1);
   }
   color: #606266;
   font-weight: 500;
