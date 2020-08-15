@@ -18,9 +18,18 @@
 import themeMap from "../../Theme/color";
 export default {
   name: "MeRadio",
+  inject: {
+    MeRadioGroup: {
+      default: null
+    }
+  },
   computed: {
+    hasMeRadioGroup() {
+      //判断Group
+      return !!this.MeRadioGroup;
+    },
     isChecked() {
-      return this.label === this.value;
+      return this.label === this.model;
     },
     _activeColor() {
       if (this.activeColor == "") {
@@ -42,11 +51,13 @@ export default {
     },
     model: {
       get() {
-        return this.value;
+        return this.hasMeRadioGroup ? this.MeRadioGroup.value : this.value;
       },
       set(value) {
         //触发父组件input事件
-        this.$emit("input", value);
+        this.hasMeRadioGroup
+          ? this.MeRadioGroup.$emit("input", value)
+          : this.$emit("input", value);
       }
     }
   },
