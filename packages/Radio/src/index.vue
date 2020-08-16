@@ -2,13 +2,14 @@
   <label class="me-radio" :class="{'me-checked':isChecked}">
     <span class="me-radio__input">
       <span
+        @click="_GroupClick"
         class="me-radio__inner"
         :class="[shape?'me-radio-shape--'+shape:'']"
         :style="activeStyle[0]"
       ></span>
       <input type="radio" class="me-radio__original" :name="name" :value="label" v-model="model" />
     </span>
-    <span class="me-radio__label" :style="activeStyle[1]">
+    <span @click="_GroupClick" class="me-radio__label" :style="activeStyle[1]">
       <slot>{{label}}</slot>
     </span>
   </label>
@@ -20,6 +21,9 @@ export default {
   name: "MeRadio",
   inject: {
     MeRadioGroup: {
+      default: null
+    },
+    GroupClick: {
       default: null
     }
   },
@@ -79,7 +83,11 @@ export default {
       default: ""
     }
   },
-  methods: {}
+  methods: {
+    _GroupClick() {
+      if (this.GroupClick) this.GroupClick();
+    }
+  }
 };
 </script>
 

@@ -16,10 +16,12 @@
     <me-radio label="女" v-model="gender" active-color="elegant" shape="square" />
     <me-radio label="女" v-model="gender" active-color="red" shape="square" />
     <br />
-    <me-radio-group v-model="g2">
-      <me-radio label="0">女</me-radio>
-      <me-radio label="1">男</me-radio>
-      <me-radio label="3">人妖</me-radio>
+    <me-radio-group v-model="g2" @click="click">
+      <div>
+        <me-radio label="0">女</me-radio>
+        <me-radio label="1">男</me-radio>
+        <me-radio label="3">人妖</me-radio>
+      </div>
     </me-radio-group>
   </div>
 </template>
@@ -35,7 +37,11 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    click(value) {
+      console.log(value);
+    }
+  },
   mounted() {}
 };
 </script>
