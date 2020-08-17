@@ -1,6 +1,6 @@
 {
   "name": "meows-ui",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "基于VUE的UI组件库",
   "main": "lib/meows-ui.umd",
   "author": {
