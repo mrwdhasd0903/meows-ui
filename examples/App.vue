@@ -25,7 +25,8 @@ export default {
         { link: "/dialog", text: "对话框" },
         { link: "/input", text: "输入框" },
         { link: "/switch", text: "开关" },
-        { link: "/radio", text: "单选框" }
+        { link: "/radio", text: "单选框" },
+        { link: "/checkbox", text: "复选框" },
       ]
     };
   }

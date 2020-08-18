@@ -6,6 +6,7 @@ import Dialog from '../packages/Dialog'
 import Input from '../packages/Input'
 import Switch from '../packages/Switch'
 import Radio from '../packages/Radio'
+import Checkbox from '../packages/Checkbox'
 
 import '../packages/Theme/index.css'
 import '../packages/Theme/transition.css'
@@ -23,7 +24,8 @@ const components = [
   ...Dialog,
   ...Input,
   ...Switch,
-  ...Radio
+  ...Radio,
+  ...Checkbox
 ]
 
 // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，那么所有的组件都会被注册
