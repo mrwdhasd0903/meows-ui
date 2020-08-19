@@ -1,7 +1,6 @@
 <template>
   <div class>
-    checkbox
-    <me-checkbox></me-checkbox>
+    <me-checkbox label="女" v-model="active"></me-checkbox>
   </div>
 </template>
 
@@ -10,7 +9,9 @@ export default {
   name: "",
   components: {},
   data() {
-    return {};
+    return {
+      active: false
+    };
   },
   computed: {},
   methods: {},
