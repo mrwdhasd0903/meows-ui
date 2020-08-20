@@ -1,30 +1,40 @@
 <template>
-  <div class="me-checkbox me-checked">
+  <label class="me-checkbox" :class="{'me-checked':model}">
     <span class="me-checkbox__input">
       <span class="me-checkbox__inner"></span>
-      <input type="checkbox" class="me-checkbox__original" />
+      <input type="checkbox" class="me-checkbox__original" :name="name" v-model="model" />
     </span>
     <span class="me-checkbox__label">
       <slot>{{label}}</slot>
     </span>
-  </div>
+  </label>
 </template>
 
 <script>
 export default {
   name: "MeCheckbox",
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit("input", value);
+      }
+    }
+  },
   props: {
-    name: {
-      type: String,
-      deafult: ""
-    },
     value: {
       type: Boolean,
-      deafult: false
+      default: false
+    },
+    name: {
+      type: String,
+      default: ""
     },
     label: {
       type: String,
-      deafult: ""
+      default: ""
     }
   }
 };
@@ -58,8 +68,8 @@ export default {
       height: 14px;
       background-color: #fff;
       z-index: 1;
-      transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
-        background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
+      transition: border-color 0.2s cubic-bezier(0.71, -0.46, 0.29, 1.46),
+        background-color 0.2s cubic-bezier(0.71, -0.46, 0.29, 1.46);
       &:after {
         box-sizing: content-box;
         content: "";

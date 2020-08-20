@@ -1,21 +1,17 @@
 <template>
   <div class>
-    <me-checkbox label="女" v-model="active"></me-checkbox>
+    <me-checkbox label="nv" v-model="active">女</me-checkbox>
   </div>
 </template>
 
 <script>
 export default {
-  name: "",
-  components: {},
   data() {
     return {
-      active: false
+      active: true
     };
   },
-  computed: {},
-  methods: {},
-  mounted() {}
+  methods: {}
 };
 </script>
 
