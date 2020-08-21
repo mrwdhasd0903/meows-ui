@@ -1,8 +1,14 @@
 <template>
-  <label class="me-checkbox" :class="{'me-checked':model}">
+  <label class="me-checkbox" :class="{'me-checked':isChecked}">
     <span class="me-checkbox__input">
       <span class="me-checkbox__inner"></span>
-      <input type="checkbox" class="me-checkbox__original" :name="name" v-model="model" />
+      <input
+        type="checkbox"
+        class="me-checkbox__original"
+        :name="name"
+        v-model="model"
+        :value="label"
+      />
     </span>
     <span class="me-checkbox__label">
       <slot>{{label}}</slot>
@@ -14,13 +20,28 @@
 export default {
   name: "MeCheckbox",
   computed: {
+    isChecked() {
+      return this.hasMeRadioGroup
+        ? this.model.includes(this.label)
+        : this.model;
+    },
     model: {
       get() {
-        return this.value;
+        return this.hasMeRadioGroup ? this.MeCheckboxGroup.value : this.value;
       },
       set(value) {
-        this.$emit("input", value);
+        this.hasMeRadioGroup
+          ? this.MeCheckboxGroup.$emit("input", value)
+          : this.$emit("input", value);
       }
+    },
+    hasMeRadioGroup() {
+      return !!this.MeCheckboxGroup;
+    }
+  },
+  inject: {
+    MeCheckboxGroup: {
+      default: null
     }
   },
   props: {
