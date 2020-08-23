@@ -1,7 +1,7 @@
 <template>
   <label class="me-checkbox" :class="{'me-checked':isChecked}">
     <span class="me-checkbox__input">
-      <span class="me-checkbox__inner"></span>
+      <span class="me-checkbox__inner" :style="activeStyle[0]"></span>
       <input
         type="checkbox"
         class="me-checkbox__original"
@@ -10,16 +10,35 @@
         :value="label"
       />
     </span>
-    <span class="me-checkbox__label">
+    <span class="me-checkbox__label" :style="activeStyle[1]">
       <slot>{{label}}</slot>
     </span>
   </label>
 </template>
 
 <script>
+import themeMap from "../../Theme/color";
 export default {
   name: "MeCheckbox",
   computed: {
+    _activeColor() {
+      if (this.activeColor == "") {
+        return themeMap.ordinary;
+      }
+      let res = themeMap[this.activeColor];
+      return res ? res : this.activeColor;
+    },
+    activeStyle() {
+      return this.isChecked
+        ? [
+            {
+              borderColor: this._activeColor,
+              backgroundColor: this._activeColor
+            },
+            { color: this._activeColor }
+          ]
+        : [null, null];
+    },
     isChecked() {
       return this.hasMeRadioGroup
         ? this.model.includes(this.label)
@@ -45,6 +64,10 @@ export default {
     }
   },
   props: {
+    activeColor: {
+      type: String,
+      default: ""
+    },
     value: {
       type: Boolean,
       default: false
@@ -126,15 +149,15 @@ export default {
 .me-checkbox.me-checked {
   .me-checkbox__input {
     .me-checkbox__inner {
-      background-color: #409eff;
-      border-color: #409eff;
+      // background-color: #409eff;
+      // border-color: #409eff;
       &:after {
         transform: rotate(45deg) scale(1);
       }
     }
   }
   .me-checkbox__label {
-    color: #409eff;
+    // color: #409eff;
   }
 }
 </style>
